@@ -1,0 +1,30 @@
+from tkinter import *
+
+class Root(Tk):
+     def __init__(root):
+        super().__init__()
+        root.currentFrame = FrameOne(root)
+        root.currentFrame.pack()
+     
+     def changeFrame(root, frame):
+        root.currentFrame.destroy()
+        root.currentFrame = frame(root)
+        root.currentFrame.pack()
+
+class FrameOne(Frame):
+     def __init__(self, master):
+        super().__init__()
+        Label(self,text='Page 1').pack()
+        Button(self, text="Click Me!",command= lambda: master.changeFrame(FrameTwo)).pack()
+
+class FrameTwo(Frame):
+     def __init__(self, master):
+        super().__init__()
+        Label(self,text='Page 2').pack()
+        Button(self, text="Click Me!",command= lambda: master.changeFrame(FrameOne)).pack()
+
+
+    
+app = Root()
+app.mainloop()
+
